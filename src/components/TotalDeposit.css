@@ -1,0 +1,42 @@
+.depositDisplay {
+  display: flex;
+  font-weight: bold;
+  align-items: flex-end;
+}
+
+.amount {
+  font-size: 80px;
+  position: relative;
+  bottom: -10px;
+}
+
+.currency {
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.deposit {
+  background-color: #b8b8b9;
+  color: white;
+}
+
+.withdraw {
+  background-color: white;
+  color: grey;
+}

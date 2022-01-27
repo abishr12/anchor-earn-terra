@@ -1,0 +1,19 @@
+.display {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.apy {
+  font-size: 12px;
+  padding: 5px 19px;
+  border-radius: 13px;
+  color: rgb(31, 31, 31);
+  background-color: white;
+  margin-bottom: 5px;
+}
+
+.interest {
+  color: rgb(75, 219, 75);
+  font-size: 50px;
+}

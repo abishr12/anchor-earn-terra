@@ -1,0 +1,9 @@
+html {
+  background-color: #efefef;
+  padding: 50px 100px 100px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
