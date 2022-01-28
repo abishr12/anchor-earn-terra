@@ -1,16 +1,6 @@
-# This template is
+# Demo
 
-This is an example of performing basic Connect, Tx, and Query in the Web App using [wallet-provider](https://www.npmjs.com/package/@terra-money/wallet-provider).
 
-# Preview this template on the CodeSandbox
 
-<https://githubbox.com/terra-money/wallet-provider/tree/main/templates/create-react-app>
+https://user-images.githubusercontent.com/20959266/151490698-1ccb3474-c40f-4a85-abf7-0a936b929683.mov
 
-# How to use this template
-
-```sh
-npx terra-templates get wallet-provider:create-react-app your-app-name
-cd your-app-name
-npm install
-npm start
-```
