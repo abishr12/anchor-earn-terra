@@ -10,7 +10,7 @@ interface TotalDepositProps {
 export const TotalDeposit = ({ account }: TotalDepositProps) => {
     const [balance, setBalance] = useState("0")
     const [isDepositing, setIsDepositing] = useState(false);
-    
+    const [isWithdrawing, setIsWithdrawing] = useState(false);
 
     console.log('account', account)
     const fetchAccountBalance = async () => {
@@ -19,7 +19,6 @@ export const TotalDeposit = ({ account }: TotalDepositProps) => {
         });
         setBalance(userBalance.total_deposit_balance_in_ust)
 
-        setIsDepositing(false)
     }
 
 
@@ -35,19 +34,31 @@ export const TotalDeposit = ({ account }: TotalDepositProps) => {
                 <div className="currency">UST</div>
             </div>
             <div className="actions">
-                <button className="deposit" disabled={isDepositing} onClick={async () => {
+                <button className="deposit" disabled={isDepositing || isWithdrawing} onClick={async () => {
                     setIsDepositing(true)
                     await account.deposit({
                         amount: '1',
                         currency: DENOMS.UST,
                       });
 
-                     fetchAccountBalance()
+                     await fetchAccountBalance()
+                     setIsDepositing(false)
                 }}>
                     
                 {isDepositing ? <div><i key="spinner" className="fas fa-spinner"/></div>: <div key="depositText">Deposit</div>} 
                 </button>
-                <button className="withdraw" onClick={() => console.log('Withdraw')} >Withdraw</button>
+                <button className="withdraw" disabled={isDepositing || isWithdrawing} onClick={async () => {
+                    setIsWithdrawing(true)
+                    await account.withdraw({
+                        amount: '1',
+                        currency: DENOMS.UST,
+                      });
+
+                     await fetchAccountBalance()
+                     setIsWithdrawing(false)
+                }} >
+                    {isWithdrawing ? <div><i key="spinner" className="fas fa-spinner"/></div>: <div key="withdrawText">Withdraw</div>} 
+                </button>
             </div>
         </Card>
     )

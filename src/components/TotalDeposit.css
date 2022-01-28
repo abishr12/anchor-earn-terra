@@ -32,10 +32,6 @@ button {
   width: 105px;
 }
 
-button:disabled {
-  background-color: gray;
-}
-
 .deposit {
   background-color: rgb(75, 219, 75);
   color: white;
