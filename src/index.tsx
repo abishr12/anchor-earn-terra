@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { getChainOptions, WalletProvider } from '@terra-money/wallet-provider';
 import ReactDOM from 'react-dom';
 import './style.css';
@@ -18,11 +18,39 @@ const anchorEarn = new AnchorEarn({
 
 
 function App() {
+  const [balance, setBalance] = useState("0")
+  const [interest, setInterest] = useState("")
+
+  const fetchAccountBalance = async () => {
+         const userBalance = await anchorEarn.balance({
+            currencies: [DENOMS.UST],
+        });
+        setBalance(userBalance.total_deposit_balance_in_ust)
+
+    }
+
+    const fetchMarketInfo = async () => {
+         const market = await anchorEarn.market({
+            currencies: [DENOMS.UST],
+        });
+        const apy = market.markets[0].APY;
+        setInterest(`${apy.substring(2,4)}.${apy.substring(4,6)}`);
+    }
+
+
+    useEffect(() => {
+        fetchMarketInfo();
+        fetchAccountBalance();
+    }, []);
+
   return (
     <div className="App">
-      <TotalDeposit account={anchorEarn} />
-      <Interest account={anchorEarn} />
-      <ExpectedInterest />
+      <TotalDeposit 
+      anchorEarn={anchorEarn} 
+      balance={balance} setBalance={setBalance}
+      fetchAccountBalance={fetchAccountBalance} />
+      <Interest interest={interest} />
+      <ExpectedInterest balance={balance} interest={interest}/>
     </div>
   );
 }

@@ -17,5 +17,13 @@
 
 .timePeriodSegment {
   width: 25%;
-  margin: 0;
+  margin: 10px 0;
+}
+
+.timePeriodSegment:hover {
+  background-color: aquamarine;
+}
+
+.timePeriodSelected {
+  background-color: rgb(75, 219, 75);
 }

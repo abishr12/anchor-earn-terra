@@ -5,27 +5,14 @@ import { AnchorEarn, CHAINS, NETWORKS, DENOMS } from "@anchor-protocol/anchor-ea
 import { Msg, MnemonicKey, Wallet, LCDClient } from "@terra-money/terra.js";
     
 interface TotalDepositProps {
-    account: AnchorEarn
+    anchorEarn: AnchorEarn,
+    balance: string,
+    setBalance: React.Dispatch<React.SetStateAction<string>>
+    fetchAccountBalance: () => Promise<void>;
 }
-export const TotalDeposit = ({ account }: TotalDepositProps) => {
-    const [balance, setBalance] = useState("0")
+export const TotalDeposit = ({ anchorEarn , balance, setBalance, fetchAccountBalance}: TotalDepositProps) => {
     const [isDepositing, setIsDepositing] = useState(false);
     const [isWithdrawing, setIsWithdrawing] = useState(false);
-
-    console.log('account', account)
-    const fetchAccountBalance = async () => {
-         const userBalance = await account.balance({
-            currencies: [DENOMS.UST],
-        });
-        setBalance(userBalance.total_deposit_balance_in_ust)
-
-    }
-
-
-    useEffect(() => {
-        fetchAccountBalance()
-    }, [])
-
 
     return (
         <Card title="Total Deposit">
@@ -36,7 +23,7 @@ export const TotalDeposit = ({ account }: TotalDepositProps) => {
             <div className="actions">
                 <button className="deposit" disabled={isDepositing || isWithdrawing} onClick={async () => {
                     setIsDepositing(true)
-                    await account.deposit({
+                    await anchorEarn.deposit({
                         amount: '1',
                         currency: DENOMS.UST,
                       });
@@ -49,7 +36,7 @@ export const TotalDeposit = ({ account }: TotalDepositProps) => {
                 </button>
                 <button className="withdraw" disabled={isDepositing || isWithdrawing} onClick={async () => {
                     setIsWithdrawing(true)
-                    await account.withdraw({
+                    await anchorEarn.withdraw({
                         amount: '1',
                         currency: DENOMS.UST,
                       });

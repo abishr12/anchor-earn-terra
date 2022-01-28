@@ -5,30 +5,14 @@ import { AnchorEarn, CHAINS, NETWORKS, DENOMS } from "@anchor-protocol/anchor-ea
 import { Msg, MnemonicKey, Wallet, LCDClient } from "@terra-money/terra.js";
 
 interface InterestProps {
-    account: AnchorEarn
+    interest: string
+
 }
 
-export const Interest = ({account}: InterestProps) => {
-    const [interest, setInterest] = useState(0)
+export const Interest = ({interest}: InterestProps) => {
 
 
-const fetchMarketInfo = async () => {
-         const market = await account.market({
-            currencies: [DENOMS.UST],
-        });
-        const apy = market.markets[0].APY
-        console.log('apy', apy)
-        // const num = apy * 100;
-        // console.log('num', num)
-        setInterest(parseFloat(apy) * 100)
-    }
-
-
-    useEffect(() => {
-        fetchMarketInfo()
-    }, [])
-    console.log('interest', interest)
-    return( 
+    return ( 
     <Card title="Interest">
         
         <div className="display">
@@ -36,7 +20,7 @@ const fetchMarketInfo = async () => {
                 APY
             </div>
             <div className="interest">
-                {interest.toFixed(2)}%
+                {interest}%
             </div>
         </div>
         
