@@ -16,11 +16,12 @@ const anchorEarn = new AnchorEarn({
       privateKey: account.privateKey,
     });
 
+
 function App() {
   return (
     <div className="App">
       <TotalDeposit account={anchorEarn} />
-      <Interest />
+      <Interest account={anchorEarn} />
       <ExpectedInterest />
     </div>
   );

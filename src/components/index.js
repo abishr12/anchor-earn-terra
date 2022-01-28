@@ -1,3 +1,3 @@
 export * from "./TotalDeposit";
-export * from "./Interest.jsx";
-export * from "./ExpectedInterest.jsx";
+export * from "./Interest";
+export * from "./ExpectedInterest";
